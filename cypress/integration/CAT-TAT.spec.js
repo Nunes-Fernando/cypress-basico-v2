@@ -18,7 +18,7 @@ describe("Central de Atendimento ao Cliente CAC-TAT", function(){
             cy.get('.success').should("be.visible")
         })
 
-        it.only("Verifique de erro ao preencher um campo obrigatório incorretamente", function(){
+        it("Verifique de erro ao preencher um campo obrigatório incorretamente", function(){
             cy.get("#firstName").type("Fernando")
             cy.get("#lastName").type("Nunes da Silva")
             //nesse caso, estou enviando um e-mail sem o @, com é caracter obrigatório irá dar erro
@@ -27,6 +27,11 @@ describe("Central de Atendimento ao Cliente CAC-TAT", function(){
             cy.get("button[type='submit']").click()
             
             cy.get('.error').should("be.visible")
+        })
+
+        it.only("Campo de telefone continua vazio ao preencher com valor não numérico", function(){
+           cy.get("#phone").type("testando...")
+            .should("have.value", '')
         })
 
     })
